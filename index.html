@@ -52,6 +52,20 @@
                 height: 400px;
             }
         }
+        .ai-message pre {
+            background-color: #1a1a1a;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            border: 1px solid #333;
+        }
+        .ai-message code, .content-to-copy code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #fBBF24;
+            background-color: #1a1a1a;
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.25rem;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -65,6 +79,7 @@
                     <a href="#ia" class="text-gray-400 hover:text-yellow-400 transition-colors">IA de Código</a>
                     <a href="#supabase" class="text-gray-400 hover:text-yellow-400 transition-colors">Supabase</a>
                     <a href="#vercel" class="text-gray-400 hover:text-yellow-400 transition-colors">Vercel</a>
+                    <a href="#agente-ia" class="text-gray-400 hover:text-yellow-400 transition-colors font-semibold">Agente IA</a>
                 </div>
                 <div class="md:hidden">
                     <select id="mobile-nav" class="block w-full rounded-md border-gray-600 bg-gray-800 text-gray-200 shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50">
@@ -72,6 +87,7 @@
                         <option value="#ia">IA de Código</option>
                         <option value="#supabase">Supabase</option>
                         <option value="#vercel">Vercel</option>
+                        <option value="#agente-ia">Agente IA</option>
                     </select>
                 </div>
             </nav>
@@ -93,6 +109,29 @@
             </section>
 
             <div id="content-container"></div>
+            
+            <hr class="my-20 border-gray-800 max-w-sm mx-auto">
+            
+            <section id="agente-ia" class="mb-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-white">Converse com o Especialista</h2>
+                    <p class="mt-3 max-w-2xl mx-auto text-md text-gray-400">Este é seu assistente IA sênior. Ele é especialista na stack IA, Supabase e Vercel. Peça códigos, tutorias ou explicações.</p>
+                </div>
+
+                <div class="max-w-4xl mx-auto bg-neutral-900 rounded-2xl border border-gray-800 shadow-lg flex flex-col h-[70vh]">
+                    <div id="chat-log" class="flex-grow p-6 space-y-6 overflow-y-auto">
+                        <!-- Mensagens do Chat -->
+                    </div>
+                    <div class="p-4 bg-neutral-900/50 border-t border-gray-700">
+                        <form id="chat-form" class="flex items-center space-x-4">
+                            <input type="text" id="user-input" class="flex-1 block w-full rounded-md bg-gray-800 border-gray-600 text-gray-200 placeholder-gray-500 focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50" placeholder="Digite sua pergunta aqui...">
+                            <button type="submit" class="inline-flex items-center justify-center rounded-md bg-yellow-500 px-4 py-2 text-sm font-semibold text-black shadow-sm hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                                Enviar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
 
         </main>
 
@@ -142,10 +181,10 @@
             title: "Tópico 3: Vercel (A Vitrine e o Sistema de Entregas)",
             description: "Aqui, seu objetivo é publicar seu aplicativo de forma automática, segura e com performance global.",
             processo: [
-                { title: "Conexão com Git (Pré-requisito)", content: ["Seu código DEVE estar em um repositório no GitHub (ou GitLab/Bitbucket). Crie o repositório e envie seu código para lá (git push)."] },
+                { title: "Conexão com Git (Pré-requisito)", content: ["Seu código DEVE estar em um repositório no GitHub (ou GitLab/Bitbucket). Crie o repositório e envie seu código para lá usando o comando `git push`."] },
                 { title: "Importando o Projeto na Vercel", content: ["Crie uma conta na Vercel e conecte-a à sua conta do GitHub.", "Clique em \"Add New...\" > \"Project\". Selecione o repositório do seu projeto. A Vercel é inteligente e geralmente detecta que é um projeto React/Next.js e preenche as configurações de build por você."] },
                 { title: "Configurando as Variáveis de Ambiente (O Cofre da Vercel)", content: ["Durante a importação do projeto, haverá uma seção \"Environment Variables\". É AQUI e SOMENTE AQUI que você vai colocar suas chaves do Supabase.", "Nome: NEXT_PUBLIC_SUPABASE_URL | Valor: (cole a URL que você guardou)<br>Nome: NEXT_PUBLIC_SUPABASE_ANON_KEY | Valor: (cole a anon key que você guardou)<br>O prefixo NEXT_PUBLIC_ informa ao Next.js (framework que a Vercel ama) que esta variável pode ser acessada publicamente no navegador. Nunca coloque uma chave secreta com este prefixo."] },
-                { title: "Deploy e o Fluxo Mágico", content: ["Clique em \"Deploy\". A Vercel vai buscar seu código no GitHub, \"compilar\" tudo e publicar em uma URL temporária (ex: meu-app-f73j.vercel.app).", "**O Fluxo Mágico (CI/CD):** A partir de agora, toda vez que você fizer uma alteração no código e a enviar para o GitHub (git push), a Vercel detectará automaticamente e fará um novo deploy para você em segundos. Você nunca mais vai arrastar arquivos para um servidor."] },
+                { title: "Deploy e o Fluxo Mágico", content: ["Clique em \"Deploy\". A Vercel vai buscar seu código no GitHub, \"compilar\" tudo e publicar em uma URL temporária (ex: meu-app-f73j.vercel.app).", "**O Fluxo Mágico (CI/CD):** A partir de agora, toda vez que você fizer uma alteração no código e a enviar para o GitHub usando `git push`, a Vercel detectará automaticamente e fará um novo deploy para você em segundos. Você nunca mais vai arrastar arquivos para um servidor."] },
                 { title: "Domínio Customizado", content: ["Vá nas configurações do seu projeto na Vercel, na aba \"Domains\". Adicione seu domínio (ex: digitalmente.app). A Vercel te dará as instruções para configurar no seu provedor de domínio (GoDaddy, Namecheap, etc.). O processo leva 5 minutos."] }
             ],
             dicas: [
@@ -161,7 +200,7 @@
         
         const createSectionHTML = (key, data) => {
             const renderItems = (items) => items.map(item => {
-                const contentHtml = item.content.map(p => `<p>${p.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-200">$1</strong>')}</p>`).join('');
+                const contentHtml = item.content.map(p => `<p>${p.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-200">$1</strong>').replace(/`([^`]+)`/g, '<code>$1</code>')}</p>`).join('');
                 return `
                 <div class="content-card bg-neutral-900 p-5 rounded-lg border border-gray-800 mb-4 transition-all hover:border-gray-700">
                     <div class="flex justify-between items-start">
@@ -352,6 +391,124 @@
                 },
             }
         });
+        
+        // --- AI Agent Logic ---
+        const chatLog = document.getElementById('chat-log');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+
+        const addMessage = (content, sender) => {
+            const messageWrapper = document.createElement('div');
+            messageWrapper.classList.add('flex', 'flex-col', sender === 'user' ? 'items-end' : 'items-start');
+            
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('max-w-xl', 'rounded-lg', 'px-4', 'py-3');
+            
+            if (sender === 'user') {
+                messageElement.classList.add('bg-yellow-500', 'text-black');
+            } else {
+                messageElement.classList.add('bg-gray-700', 'text-gray-200', 'ai-message');
+            }
+            
+            messageElement.innerHTML = content;
+            messageWrapper.appendChild(messageElement);
+            chatLog.appendChild(messageWrapper);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        };
+        
+        const getAiResponse = (query) => {
+            const q = query.toLowerCase();
+            if (q.includes("olá") || q.includes("oi")) {
+                return "Olá, Lord! Sou seu especialista sênior em IA, Supabase e Vercel. Como posso ajudar no seu projeto hoje?";
+            }
+            if (q.includes("código") && q.includes("login")) {
+                return `Com certeza. Aqui está um exemplo de um componente de login simples em React/Next.js que se integra com o Supabase.
+                <p class="mt-2 text-xs text-gray-400">Lembre-se: este código espera que você tenha configurado o cliente Supabase e as variáveis de ambiente, conforme o guia.</p>
+                <pre><code>import { useState } from 'react';
+import { supabase } from '../utils/supabaseClient';
+
+export default function Auth() {
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+
+  const handleLogin = async (email) => {
+    try {
+      setLoading(true);
+      const { error } = await supabase.auth.signInWithOtp({ email });
+      if (error) throw error;
+      alert('Verifique seu email pelo link de login!');
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Login com Supabase</h1>
+      <p>Faça login via link mágico com seu email abaixo.</p>
+      <input
+        type="email"
+        placeholder="Seu email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <button onClick={() => handleLogin(email)} disabled={loading}>
+        {loading ? 'Enviando...' : 'Enviar link mágico'}
+      </button>
+    </div>
+  );
+}</code></pre>`;
+            }
+            if (q.includes("explica") && q.includes("rls")) {
+                return `Excelente pergunta. RLS, ou Row-Level Security, é a funcionalidade mais importante de segurança no Supabase.
+                <br><br>
+                <strong>Em termos simples:</strong> É um conjunto de regras que você cria no banco de dados que filtram automaticamente os dados que um usuário pode ver, editar ou apagar.
+                <br><br>
+                <strong>Passo a passo:</strong>
+                <ol class="list-decimal list-inside space-y-2 mt-2">
+                    <li>Ative o RLS na sua tabela. Isso bloqueia todo o acesso por padrão.</li>
+                    <li>Crie uma "Policy" (política/regra).</li>
+                    <li>Na regra, você escreve uma condição. A mais comum é <code>auth.uid() = user_id</code>.</li>
+                    <li>Isso significa: "Se o ID do usuário que está logado (<code>auth.uid()</code>) for o mesmo da coluna <code>user_id</code> nesta linha, então ele tem permissão para acessá-la."</li>
+                </ol>
+                <br>
+                Isso protege seus dados no nível mais fundamental, garantindo que mesmo que haja um bug no seu front-end, um usuário nunca poderá acessar os dados de outro.`;
+            }
+             if (q.includes("passo a passo") && q.includes("deploy") && q.includes("vercel")) {
+                return `Claro. Fazer o deploy na Vercel é um processo gratificante. Aqui está o passo a passo:
+                <ol class="list-decimal list-inside space-y-2 mt-2">
+                    <li><strong>Código no GitHub:</strong> Garanta que seu projeto esteja em um repositório no GitHub. Este é o ponto de partida.</li>
+                    <li><strong>Crie uma conta na Vercel:</strong> Use sua conta do GitHub para se registrar, a integração é mais fácil.</li>
+                    <li><strong>Importe o Projeto:</strong> No dashboard da Vercel, clique em "Add New..." -> "Project". Selecione o repositório que você quer publicar.</li>
+                    <li><strong>Configure as Variáveis de Ambiente:</strong> Este é o passo CRÍTICO. A Vercel vai pedir as variáveis de ambiente. Você deve adicionar a <code>NEXT_PUBLIC_SUPABASE_URL</code> e <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> aqui. Nunca as coloque no código!</li>
+                    <li><strong>Clique em "Deploy":</strong> A Vercel vai analisar, compilar e publicar seu site. Em minutos, ele estará no ar em uma URL temporária.</li>
+                    <li><strong>Domínio Customizado (Opcional):</strong> Após o deploy, você pode ir nas configurações do projeto e adicionar seu próprio domínio.</li>
+                </ol>
+                A partir daí, todo <code>git push</code> para sua branch principal vai automaticamente atualizar o site. É o fluxo mágico de CI/CD.`;
+            }
+
+            return "Desculpe, não entendi bem a sua pergunta. Você poderia reformular? Lembre-se, sou especialista em IA de Código, Supabase e Vercel.";
+        };
+
+        const handleChatSubmit = (e) => {
+            e.preventDefault();
+            const userQuery = userInput.value.trim();
+            if (!userQuery) return;
+
+            addMessage(userQuery, 'user');
+            userInput.value = '';
+
+            setTimeout(() => {
+                const aiResponse = getAiResponse(userQuery);
+                addMessage(aiResponse, 'ai');
+            }, 1000);
+        };
+
+        chatForm.addEventListener('submit', handleChatSubmit);
+        
+        addMessage("Olá, Lord! Sou seu especialista sênior em IA, Supabase e Vercel. Como posso ajudar no seu projeto hoje?", 'ai');
     });
     </script>
 </body>
